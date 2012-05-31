@@ -236,6 +236,10 @@ function printmode() {
   return mode;
 }
 
+function noheadfoot() {
+    return window.arguments && window.arguments[5];
+}
+
 function printWithCanvas() {
   var canvas = document.createElementNS("http://www.w3.org/1999/xhtml",
                                         "canvas");
@@ -308,8 +312,6 @@ function delayedPrintPageLoadComplete() {
     return;
   else
     gLocked = true;
-
-  var noHeadOrFoot = true; /* TODO: pass in as command-line option */
 
   var mode = printmode();
 
@@ -412,7 +414,7 @@ function delayedPrintPageLoadComplete() {
      */
     settings.printerName = printerName;
 
-    if (noHeadOrFoot) {
+    if ( noheadfoot() ) {
         settings.headerStrLeft = "";
         settings.headerStrCenter = "";
         settings.headerStrRight = "";
