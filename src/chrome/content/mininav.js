@@ -309,6 +309,8 @@ function delayedPrintPageLoadComplete() {
   else
     gLocked = true;
 
+  var noHeadOrFoot = true; /* TODO: pass in as command-line option */
+
   var mode = printmode();
 
   if (mode == 2) {
@@ -409,6 +411,15 @@ function delayedPrintPageLoadComplete() {
        So copy from default printer settings.
      */
     settings.printerName = printerName;
+
+    if (noHeadOrFoot) {
+        settings.headerStrLeft = "";
+        settings.headerStrCenter = "";
+        settings.headerStrRight = "";
+        settings.footerStrLeft = "";
+        settings.footerStrCenter = "";
+        settings.footerStrRight = "";
+    } 
 
     /* We have no interest on those other than prefs. */
     printSettingsService.initPrintSettingsFromPrefs
