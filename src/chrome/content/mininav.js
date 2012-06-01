@@ -236,6 +236,10 @@ function printmode() {
   return mode;
 }
 
+function noheadfoot() {
+    return window.arguments && window.arguments[5];
+}
+
 function printWithCanvas() {
   var canvas = document.createElementNS("http://www.w3.org/1999/xhtml",
                                         "canvas");
@@ -353,7 +357,7 @@ function delayedPrintPageLoadComplete() {
   }
 
   // We can't convert from XUL to printable format.  
-  if (content.document.contentType = "text/xul") {
+  if (content.document.contentType == "text/xul") {
     delayedShutdown();
     return;
   }
@@ -409,6 +413,15 @@ function delayedPrintPageLoadComplete() {
        So copy from default printer settings.
      */
     settings.printerName = printerName;
+
+    if ( noheadfoot() ) {
+        settings.headerStrLeft = "";
+        settings.headerStrCenter = "";
+        settings.headerStrRight = "";
+        settings.footerStrLeft = "";
+        settings.footerStrCenter = "";
+        settings.footerStrRight = "";
+    } 
 
     /* We have no interest on those other than prefs. */
     printSettingsService.initPrintSettingsFromPrefs

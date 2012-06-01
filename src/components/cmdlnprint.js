@@ -122,10 +122,12 @@ var gComponent = {
 
       param = aCmdLine.handleFlagWithParam("printprinter", false);
       var printer = param;
+
+      var noheadfoot = aCmdLine.handleFlag("noheadfoot",false);
       
       openWindow(null, "chrome://cmdlnprint/content/mininav.xul", "_blank",
                  "chrome,dialog=no,all",
-                [uri.spec, mode.toString(), path, delay, printer]);
+                 [uri.spec, mode.toString(), path, delay, printer, noheadfoot]);
     }
   },
 
